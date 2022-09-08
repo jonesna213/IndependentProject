@@ -1,0 +1,6 @@
+#house {
+    font-size: 3rem;
+}
+.nav-link:active {
+    background-color: grey;
+}
