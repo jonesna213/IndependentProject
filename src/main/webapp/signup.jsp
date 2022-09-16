@@ -20,6 +20,7 @@
                     <c:if test="${success == false}" >
                         <h3 class="text-danger">Failed to create account.
                             Please resubmit with the correct information.</h3>
+                        <p>${message}</p>
                     </c:if>
                     <c:remove var="success" scope="session"/>
                 </c:if>

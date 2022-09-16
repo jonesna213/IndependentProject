@@ -1,6 +1,6 @@
 package com.njones.authentication;
 
-import com.njones.entities.User;
+import com.njones.persistence.Database;
 
 import java.io.*;
 import javax.servlet.*;
@@ -35,14 +35,21 @@ public class CreateAccountServlet extends HttpServlet {
         String username = request.getParameter("uname");
         String password = request.getParameter("password");
         boolean success;
+        Database database = new Database();
 
         if (householdName.equals("") || firstName.equals("") || lastName.equals("") ||
                 email.equals("") || username.equals("") || password.equals("")) {
             success = false;
         } else {
             //Add the user to the database
-
-            success = true;
+            if (!database.newUsername(username)) {
+                session.setAttribute("message", "The username you chose is not available, " +
+                        "please choose another");
+                success = false;
+            } else {
+                database.signUpUser(householdName, firstName, lastName, email, username, password);
+                success = true;
+            }
         }
 
         session.setAttribute("success", success);
