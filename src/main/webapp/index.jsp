@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-12"></div>
                 <div class="col-12 col-lg-6"></div>
-                <a class="btn btn-success col-10 col-lg-5" id="signUpButton" href="#">Sign Up Now</a>
+                <a class="btn btn-success col-10 col-lg-5" id="signUpButton" href="signup.jsp">Sign Up Now</a>
                 <div class="col-12 col-lg-5 py-1 px-5">
                     <h3>Why use Our House?</h3>
                     <p>Our house is to help anyone really, but it is mainly aimed towards college students or friends that

@@ -13,7 +13,7 @@ import java.security.SecureRandom;
  * I found this on https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
  * Reason I used already created code was because I was not taught password hashing in java yet.
  */
-public class passwords {
+public class Passwords {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     public String getPassword(String password) throws NoSuchAlgorithmException {
