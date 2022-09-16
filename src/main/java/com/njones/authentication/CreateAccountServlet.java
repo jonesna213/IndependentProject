@@ -47,8 +47,7 @@ public class CreateAccountServlet extends HttpServlet {
                         "please choose another");
                 success = false;
             } else {
-                database.signUpUser(householdName, firstName, lastName, email, username, password);
-                success = true;
+                success = database.signUpUser(householdName, firstName, lastName, email, username, password);
             }
         }
 

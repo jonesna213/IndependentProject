@@ -39,7 +39,7 @@
                     <div class="form-group my-3">
                         <label for="fname" class="fw-bold">First Name</label>
                         <input type="text" class="form-control"
-                               name="first" id="fname" maxlength="40"
+                               name="fname" id="fname" maxlength="40"
                                pattern="[a-zA-Z]{1,40}"
                                title="First name is required, up to 40 characters"
                                required/>
@@ -47,7 +47,7 @@
                     <div class="form-group my-3">
                         <label for="lname" class="fw-bold">Last Name</label>
                         <input type="text" class="form-control"
-                               name="last" id="lname" maxlength="60"
+                               name="lname" id="lname" maxlength="60"
                                pattern="[a-zA-Z]{1,60}"
                                title="Last name is required, up to 60 characters"
                                required/>

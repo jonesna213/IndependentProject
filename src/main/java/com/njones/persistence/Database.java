@@ -34,34 +34,36 @@ public class Database implements PropertiesLoader {
      * @param username      the username
      * @param password      the password
      */
-    public void signUpUser(String householdName, String firstName, String lastName, String email,
+    public boolean signUpUser(String householdName, String firstName, String lastName, String email,
                               String username, String password) {
+        boolean success = false;
         Passwords genPassword = new Passwords();
         Connection connection = connectToDatabase();
-        String sql;
+        String sql = "INSERT INTO households (passwordHash, householdName) VALUES (?, ?)";
         try (PreparedStatement pS = connection.prepareStatement(sql)) {
 
-            pS.setString(1, householdName);
-            pS.setString(2, firstName);
-            pS.setString(3, lastName);
-            pS.setString(4, email);
-            pS.setString(5, username);
-            pS.setString(6, genPassword.getPassword(password));
+            pS.setString(1, genPassword.getPassword(password));
+            pS.setString(2, householdName);
 
             pS.executeUpdate();
+            int household = getHousehold(householdName);
+            if (household != 0) {
+                insertNewUser(firstName, lastName, email, username, "admin", household);
+                success = true;
+            }
 
         } catch (SQLException | NoSuchAlgorithmException sqlException) {
-            sqlException.printStackTrace();
+            logger.error("Sql exception or password gen exception ", sqlException);
         } finally {
             try {
                 if (connection != null) {
                     connection.close();
                 }
             } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
+                logger.error("Sql exception ", sqlException);
             }
         }
-
+        return success;
     }
 
     /**
@@ -104,12 +106,88 @@ public class Database implements PropertiesLoader {
         return isNew;
     }
 
-    private void insertNewUser(String householdName, String firstName, String lastName, String email,
-                               String username, String password) {
+    /**
+     * This function inserts a new user
+     *
+     * @param firstName users first name
+     * @param lastName users last name
+     * @param email users email
+     * @param username users username
+     * @param householdPrivileges users household privileges
+     * @param householdId users household id
+     */
+    private void insertNewUser(String firstName, String lastName, String email,
+                               String username, String householdPrivileges, int householdId) {
 
+        Connection connection = connectToDatabase();
+        String sql = "INSERT INTO users (firstName, lastName, username, email, householdPrivileges, household) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pS = connection.prepareStatement(sql)) {
+
+            pS.setString(1, firstName);
+            pS.setString(2, lastName);
+            pS.setString(3, username);
+            pS.setString(4, email);
+            pS.setString(5, householdPrivileges);
+            pS.setString(6, String.valueOf(householdId));
+
+            pS.executeUpdate();
+
+        } catch (SQLException sqlException) {
+            logger.error("Sql exception ", sqlException);
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException sqlException) {
+                logger.error("Sql exception ", sqlException);
+            }
+        }
 
     }
 
+    /**
+     * This function gets the household id from the households table so that a new user can be inserted with
+     * the correct household foreign key,
+     *
+     * @param householdName the name of the household
+     * @return the household id for the household passed in
+     */
+    private int getHousehold(String householdName) {
+        int householdID = 0;
+        Connection connection = connectToDatabase();
+        ResultSet resultSet = null;
+        String sql = "SELECT Id FROM households WHERE householdName = ?";
+
+        try (PreparedStatement pS = connection.prepareStatement(sql)) {
+
+            pS.setString(1, householdName);
+
+            resultSet = pS.executeQuery();
+
+            while (resultSet.next()) {
+                householdID = resultSet.getInt("Id");
+            }
+
+
+        } catch (SQLException sqlException) {
+            logger.error("SQL exception: ", sqlException);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException sqlException) {
+                logger.error("SQL exception: ", sqlException);
+            }
+        }
+        return householdID;
+    }
 
     /**
      * Connects to database and returns the connection.
