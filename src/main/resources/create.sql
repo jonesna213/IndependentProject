@@ -6,6 +6,7 @@
 CREATE TABLE households (
                             Id int NOT NULL AUTO_INCREMENT,
                             passwordHash varchar(255) NOT NULL,
+                            salt varchar(255) NOT NULL,
                             householdName varchar(40) NOT NULL,
                             CONSTRAINT households_pk PRIMARY KEY (Id)
 );
@@ -17,7 +18,7 @@ CREATE TABLE users (
                        firstName varchar(40) NOT NULL,
                        lastName varchar(60) NOT NULL,
                        email varchar(255) NULL,
-                       householdPrivileges varchar(10) NOT NULL DEFAULT user,
+                       householdPrivileges varchar(10) NOT NULL DEFAULT "user",
                        household int NOT NULL,
                        CONSTRAINT users_pk PRIMARY KEY (Id)
 );

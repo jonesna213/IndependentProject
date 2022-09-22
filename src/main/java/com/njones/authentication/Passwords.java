@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Logger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class is for either creating or checking that a password matches.
@@ -16,9 +18,18 @@ import java.security.SecureRandom;
 public class Passwords {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
-    public String getPassword(String password) throws NoSuchAlgorithmException {
+    //used for creating a new account
+    public List<String> getPassword(String password) throws NoSuchAlgorithmException {
+        List<String> passwordHashAndSalt = new ArrayList<String>();
         String salt = getSalt();
+        passwordHashAndSalt.add(salt);
+        passwordHashAndSalt.add(get_SHA_512_SecurePassword(password, salt));
 
+        return passwordHashAndSalt;
+    }
+
+    //Used for signing in
+    public String getPasswordHash(String password, String salt) {
         return get_SHA_512_SecurePassword(password, salt);
     }
 

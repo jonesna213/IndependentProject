@@ -1,12 +1,14 @@
 package com.njones.persistence;
 
 import com.njones.authentication.Passwords;
+import com.njones.entities.User;
 import com.njones.utilities.PropertiesLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -39,11 +41,14 @@ public class Database implements PropertiesLoader {
         boolean success = false;
         Passwords genPassword = new Passwords();
         Connection connection = connectToDatabase();
-        String sql = "INSERT INTO households (passwordHash, householdName) VALUES (?, ?)";
-        try (PreparedStatement pS = connection.prepareStatement(sql)) {
+        String sql = "INSERT INTO households (passwordHash, salt, householdName) VALUES (?, ?, ?)";
 
-            pS.setString(1, genPassword.getPassword(password));
-            pS.setString(2, householdName);
+        try (PreparedStatement pS = connection.prepareStatement(sql)) {
+            List<String> passwordStuff = genPassword.getPassword(password);
+
+            pS.setString(1, passwordStuff.get(1));
+            pS.setString(2, passwordStuff.get(0));
+            pS.setString(3, householdName);
 
             pS.executeUpdate();
             int household = getHousehold(householdName);
@@ -64,6 +69,100 @@ public class Database implements PropertiesLoader {
             }
         }
         return success;
+    }
+
+
+    /**
+     * Sign in user.
+     *
+     * @param username the username
+     * @param password the password
+     * @param householdName the household name
+     * @return the user object containing the user info
+     */
+    public User signInUser(String username, String password, String householdName) {
+        Passwords passwords = new Passwords();
+        Connection connection = connectToDatabase();
+        ResultSet resultSet = null;
+        User user = new User();
+        String sql = "SELECT firstName, lastName, email, householdPrivileges " +
+                "FROM users as u INNER JOIN households as h ON u.household = h.Id " +
+                "WHERE u.username = ? AND h.passwordHash = ?";
+
+        try (PreparedStatement pS = connection.prepareStatement(sql)) {
+
+            pS.setString(1, username);
+            pS.setString(2, passwords.getPasswordHash(password, getSalt(getHousehold(householdName))));
+
+            resultSet = pS.executeQuery();
+
+            if (resultSet.next()) {
+                user.setFirstName(resultSet.getString("firstName"));
+                user.setLastName(resultSet.getString("lastName"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPermissions(resultSet.getString("householdPrivileges"));
+                user.setUsername(username);
+                user.setHouseholdName(householdName);
+            } else {
+                user = null;
+            }
+
+        } catch (SQLException sqlException) {
+            logger.error("SQL exception or password exception: ", sqlException);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException sqlException) {
+                logger.error("SQL exception: ", sqlException);
+            }
+        }
+        return user;
+    }
+
+    /**
+     * Gets the salt from database to verify password
+     * @param household the household id
+     * @return the string of the salt for password
+     */
+    private String getSalt(int household) {
+        String salt = "";
+        Connection connection = connectToDatabase();
+        ResultSet resultSet = null;
+        String sql = "SELECT salt FROM households WHERE Id = ?";
+
+        try (PreparedStatement pS = connection.prepareStatement(sql)) {
+
+            pS.setString(1, String.valueOf(household));
+
+            resultSet = pS.executeQuery();
+
+            while (resultSet.next()) {
+                salt = resultSet.getString("salt");
+            }
+
+
+        } catch (SQLException sqlException) {
+            logger.error("SQL exception: ", sqlException);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException sqlException) {
+                logger.error("SQL exception: ", sqlException);
+            }
+        }
+        return salt;
     }
 
     /**

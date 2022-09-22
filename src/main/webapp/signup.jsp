@@ -28,6 +28,7 @@
                                pattern="[a-zA-Z]{1,40}"
                                title="Household Name name is required, up to 40 characters"
                                required/>
+                        <p>Make it easy on yourself for signing in and make it a single word name.</p>
                     </div>
                     <div class="form-group my-3">
                         <label for="fname" class="fw-bold">First Name</label>
