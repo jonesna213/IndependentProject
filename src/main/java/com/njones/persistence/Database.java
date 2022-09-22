@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * The type Database.
+ * This class is for signing in and signing up using the database.
  */
 public class Database implements PropertiesLoader {
     private Properties properties;

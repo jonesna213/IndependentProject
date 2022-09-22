@@ -10,9 +10,12 @@
 </header>
 <nav class="nav nav-pills justify-content-between">
     <a href="index.jsp" class="nav-link text-dark">Home</a>
-    <a href="members.jsp" class="nav-link text-dark">Members</a>
-    <a href="chores.jsp" class="nav-link text-dark">Chores</a>
-    <a href="bills.jsp" class="nav-link text-dark">Bills</a>
-    <a href="#" class="nav-link text-light bg-secondary">Sign Out</a>
+    <c:if test="${user != null}" >
+        <a href="members.jsp" class="nav-link text-dark">Members</a>
+        <a href="chores.jsp" class="nav-link text-dark">Chores</a>
+        <a href="bills.jsp" class="nav-link text-dark">Bills</a>
+        <a href="signout.jsp" class="nav-link text-light bg-secondary">Sign Out</a>
+    </c:if>
+
 </nav>
 <hr>

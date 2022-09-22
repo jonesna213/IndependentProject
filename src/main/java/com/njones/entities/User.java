@@ -11,18 +11,6 @@ public class User {
     private String username;
     private String permissions;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "householdName='" + householdName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", permissions='" + permissions + '\'' +
-                '}';
-    }
-
     /**
      * Instantiates a new User.
      */
@@ -135,5 +123,21 @@ public class User {
      */
     public void setPermissions(String permissions) {
         this.permissions = permissions;
+    }
+
+    /**
+     * gets the string representation of the user
+     * @return string representation of user
+     */
+    @Override
+    public String toString() {
+        return "User{" +
+                "householdName='" + householdName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", permissions='" + permissions + '\'' +
+                '}';
     }
 }
