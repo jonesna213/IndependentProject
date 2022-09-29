@@ -13,6 +13,7 @@
         </c:if>
         <c:if test="${user != null}" >
             <h3 class="text-success">Hello, ${user.firstName} You have successfully signed in.</h3>
+            <c:remove var="error" scope="session"/>
         </c:if>
 
         <form action="signInServlet" method="post">

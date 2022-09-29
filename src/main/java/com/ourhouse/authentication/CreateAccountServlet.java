@@ -46,6 +46,10 @@ public class CreateAccountServlet extends HttpServlet {
                 session.setAttribute("message", "The username you chose is not available, " +
                         "please choose another");
                 success = false;
+            } else if (!database.newHouseholdName(householdName)) {
+                session.setAttribute("message", "The household name you chose is not available, " +
+                        "please choose another");
+                success = false;
             } else {
                 success = database.signUpUser(householdName, firstName, lastName, email, username, password);
             }

@@ -1,5 +1,6 @@
 package com.ourhouse.entity;
 
+
 /**
  * The user object
  */
@@ -10,6 +11,7 @@ public class User {
     private String email;
     private String username;
     private String permissions;
+    private Household household;
 
     /**
      * Instantiates a new User.
@@ -33,6 +35,24 @@ public class User {
      */
     public void setHouseholdName(String householdName) {
         this.householdName = householdName;
+    }
+
+    /**
+     * Gets household.
+     *
+     * @return the household
+     */
+    public Household getHousehold() {
+        return household;
+    }
+
+    /**
+     * sets household.
+     *
+     * @param household the household object
+     */
+    public void setHousehold(Household household) {
+        this.household = household;
     }
 
     /**
