@@ -13,7 +13,18 @@
                 </div>
                 <div class="col-12"></div>
                 <div class="col-12 col-lg-6"></div>
-                <a class="btn btn-success col-10 col-lg-5" id="signUpButton" href="signup.jsp">Sign Up Now</a>
+                <c:if test="${user != null}" >
+                    <div class="col-10 col-lg-5">
+                        <h3>How to use Our House?</h3>
+                        <p>If you would like to add other members to
+                            your household visit the members tab.
+                            If you would like to see the current chores
+                            or bills visit the corresponding tab.</p>
+                    </div>
+                </c:if>
+                <c:if test="${user == null}" >
+                    <a class="btn btn-success col-10 col-lg-5" id="signUpButton" href="signup.jsp">Sign Up Now</a>
+                </c:if>
                 <div class="col-12 col-lg-5 py-1 px-5">
                     <h3>Why use Our House?</h3>
                     <p>Our house is to help anyone really, but it is mainly aimed towards college students or friends that

@@ -1,7 +1,7 @@
-package com.njones.authentication;
+package com.ourhouse.authentication;
 
-import com.njones.entities.User;
-import com.njones.persistence.Database;
+import com.ourhouse.entity.User;
+import com.ourhouse.persistence.Database;
 
 import java.io.*;
 import javax.servlet.*;

@@ -1,8 +1,8 @@
-package com.njones.persistence;
+package com.ourhouse.persistence;
 
-import com.njones.authentication.Passwords;
-import com.njones.entities.User;
-import com.njones.utilities.PropertiesLoader;
+import com.ourhouse.authentication.Passwords;
+import com.ourhouse.entity.User;
+import com.ourhouse.utilities.PropertiesLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * This class is for signing in and signing up using the database.
+ * The type Database.
  */
 public class Database implements PropertiesLoader {
     private Properties properties;

@@ -1,4 +1,4 @@
-package com.njones.authentication;
+package com.ourhouse.authentication;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

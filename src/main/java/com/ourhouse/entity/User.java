@@ -1,4 +1,4 @@
-package com.njones.entities;
+package com.ourhouse.entity;
 
 /**
  * The user object
