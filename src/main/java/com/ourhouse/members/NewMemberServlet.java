@@ -2,6 +2,7 @@ package com.ourhouse.members;
 
 import com.ourhouse.entity.User;
 import com.ourhouse.persistence.Database;
+import com.ourhouse.persistence.GenericDao;
 
 import java.io.*;
 import javax.servlet.*;
@@ -29,7 +30,7 @@ public class NewMemberServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        Database database = new Database();
+        GenericDao<User> userDao = new GenericDao<>(User.class);
         boolean error = false;
 
         String firstName = request.getParameter("fname");
@@ -44,7 +45,7 @@ public class NewMemberServlet extends HttpServlet {
         if (username.equals("") || firstName.equals("") || lastName.equals("") || perms.equals("")) {
             session.setAttribute("message", "You need to fill out all the fields (email is optional)");
             error = true;
-        } else if (!database.newUsername(username)){
+        } else if (userDao.getByPropertyEqual("username", username).size() != 0){
             session.setAttribute("message", "The username you chose is not available, " +
                     "please choose another");
             error = true;
@@ -54,10 +55,13 @@ public class NewMemberServlet extends HttpServlet {
             newUser.setEmail(email);
             newUser.setUsername(username);
             newUser.setPermissions(perms);
-            //If the member was successfully added in the database, add the new user to the household object
-            if (database.addMember(newUser, user)) {
-                user.getHousehold().addMember(newUser);
+            newUser.setHousehold(user.getHousehold());
+
+            if (userDao.insert(newUser) == 0) {
+                error = true;
             }
+
+            user.getHousehold().addMember(newUser);
         }
 
         session.setAttribute("error", error);

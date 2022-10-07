@@ -2,7 +2,6 @@ package com.ourhouse.authentication;
 
 import com.ourhouse.entity.Household;
 import com.ourhouse.entity.User;
-import com.ourhouse.persistence.Database;
 import com.ourhouse.persistence.GenericDao;
 
 import java.io.*;

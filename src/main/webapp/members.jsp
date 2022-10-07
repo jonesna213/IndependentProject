@@ -10,7 +10,7 @@
             <%@include file="header.jsp"%>
             <div class="d-flex flex-row">
                 <div class="mx-auto w-100 px-3">
-                    <h3 class="text-decoration-underline pb-3">Members of ${user.householdName}</h3>
+                    <h3 class="text-decoration-underline pb-3">Members of ${user.getHousehold().getHouseholdName()}</h3>
                     <table class="table table-hover border">
                         <thead>
                             <tr>
