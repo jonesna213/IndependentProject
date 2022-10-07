@@ -1,10 +1,27 @@
 package com.ourhouse.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The type Household.
+ */
+@Entity(name = "Household")
+@Table(name = "household")
 public class Household {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    @Column(name = "Id")
     private int id;
+    private String passwordHash;
+    private String salt;
+    private String householdName;
+
+    @OneToMany(mappedBy = "household", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<User> members = new HashSet<>();
 
     /**
@@ -29,6 +46,60 @@ public class Household {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * Gets password hash.
+     *
+     * @return the password hash
+     */
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    /**
+     * Sets password hash.
+     *
+     * @param passwordHash the password hash
+     */
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    /**
+     * Gets salt.
+     *
+     * @return the salt
+     */
+    public String getSalt() {
+        return salt;
+    }
+
+    /**
+     * Sets salt.
+     *
+     * @param salt the salt
+     */
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    /**
+     * Gets household name.
+     *
+     * @return the household name
+     */
+    public String getHouseholdName() {
+        return householdName;
+    }
+
+    /**
+     * Sets household name.
+     *
+     * @param householdName the household name
+     */
+    public void setHouseholdName(String householdName) {
+        this.householdName = householdName;
     }
 
     /**

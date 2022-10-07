@@ -47,7 +47,7 @@
                                required/>
                     </div>
                     <div class="form-group my-3">
-                        <label for="email" class="fw-bold">Email address</label>
+                        <label for="email" class="fw-bold">Email</label>
                         <input type="email" class="form-control"
                                name="email" id="email"
                                pattern="\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}"

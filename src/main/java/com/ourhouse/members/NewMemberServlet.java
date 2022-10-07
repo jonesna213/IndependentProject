@@ -14,7 +14,7 @@ import javax.servlet.annotation.*;
 )
 
 /**
- This servlet class is for adding a new member
+ * This servlet class is for adding a new member
  */
 public class NewMemberServlet extends HttpServlet {
     /**
@@ -29,13 +29,15 @@ public class NewMemberServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        Database database = new Database();
+        boolean error = false;
+
         String firstName = request.getParameter("fname");
         String lastName = request.getParameter("lname");
         String email = request.getParameter("email");
         String username = request.getParameter("uname");
         String perms = request.getParameter("perms");
-        boolean error = false;
-        Database database = new Database();
+
         User user = (User) session.getAttribute("user");
         User newUser = new User();
 
@@ -52,10 +54,8 @@ public class NewMemberServlet extends HttpServlet {
             newUser.setEmail(email);
             newUser.setUsername(username);
             newUser.setPermissions(perms);
-
+            //If the member was successfully added in the database, add the new user to the household object
             if (database.addMember(newUser, user)) {
-                error = false;
-
                 user.getHousehold().addMember(newUser);
             }
         }

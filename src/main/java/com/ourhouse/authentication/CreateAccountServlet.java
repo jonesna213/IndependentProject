@@ -1,8 +1,14 @@
 package com.ourhouse.authentication;
 
-import com.ourhouse.persistence.Database;
+import com.ourhouse.entity.Household;
+import com.ourhouse.entity.User;
+import com.ourhouse.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -16,6 +22,7 @@ import javax.servlet.annotation.*;
     This servlet class is for creating an account.
  */
 public class CreateAccountServlet extends HttpServlet {
+    private final Logger logger = LogManager.getLogger(this.getClass());
     /**
      *  Handles HTTP POST requests.
      *
@@ -34,24 +41,47 @@ public class CreateAccountServlet extends HttpServlet {
         String email = request.getParameter("email");
         String username = request.getParameter("uname");
         String password = request.getParameter("password");
-        boolean success;
-        Database database = new Database();
+        boolean success = true;
+        GenericDao<User> userDao = new GenericDao<>(User.class);
+        GenericDao<Household> householdDao = new GenericDao<>(Household.class);
 
         if (householdName.equals("") || firstName.equals("") || lastName.equals("") ||
                 email.equals("") || username.equals("") || password.equals("")) {
             success = false;
         } else {
             //Add the user to the database
-            if (!database.newUsername(username)) {
+            if (householdDao.getByPropertyEqual("householdName", householdName).size() != 0) {
                 session.setAttribute("message", "The username you chose is not available, " +
                         "please choose another");
                 success = false;
-            } else if (!database.newHouseholdName(householdName)) {
+            } else if (userDao.getByPropertyEqual("username", username).size() != 0) {
                 session.setAttribute("message", "The household name you chose is not available, " +
                         "please choose another");
                 success = false;
             } else {
-                success = database.signUpUser(householdName, firstName, lastName, email, username, password);
+                try {
+                    Passwords genPassword = new Passwords();
+                    List<String> passwordStuff = genPassword.getPassword(password);
+
+                    Household newHousehold = new Household();
+                    newHousehold.setHouseholdName(householdName);
+                    newHousehold.setSalt(passwordStuff.get(0));
+                    newHousehold.setPasswordHash(passwordStuff.get(1));
+
+                    User newUser = new User();
+                    newUser.setFirstName(firstName);
+                    newUser.setLastName(lastName);
+                    newUser.setUsername(username);
+                    newUser.setPermissions("admin");
+                    newUser.setEmail(email);
+
+                    newHousehold.addMember(newUser);
+
+                    householdDao.insert(newHousehold);
+                } catch (NoSuchAlgorithmException e) {
+                    logger.error("Password gen problem", e);
+                    success = false;
+                }
             }
         }
 

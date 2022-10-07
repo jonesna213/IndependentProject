@@ -30,8 +30,8 @@
                                 <td>${member.permissions}</td>
                                 <c:if test="${user.permissions.equals('admin')}" >
                                     <td>
-                                        <form action="displayEditMemberServlet" method="post">
-                                            <input type="hidden" value="${member}">
+                                        <form action="displayEditMemberPageServlet" method="post">
+                                            <input class="d-none" type="text" name="memberToEdit" value="${member}">
                                             <input type="submit" value="Edit">
                                         </form>
                                     </td>
@@ -74,7 +74,7 @@
                                        required/>
                             </div>
                             <div class="form-group my-3">
-                                <label for="email" class="fw-bold">Email address</label>
+                                <label for="email" class="fw-bold">Email (Optional)</label>
                                 <input type="email" class="form-control"
                                        name="email" id="email"
                                        pattern="\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}"

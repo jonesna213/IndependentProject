@@ -108,7 +108,6 @@ public class Database implements PropertiesLoader {
                 user.setEmail(resultSet.getString("email"));
                 user.setPermissions(resultSet.getString("householdPrivileges"));
                 user.setUsername(username);
-                user.setHouseholdName(householdName);
                 user.setHousehold(household);
                 household.setMembers(getAllMembers(householdId));
                 household.setId(householdId);
@@ -346,7 +345,6 @@ public class Database implements PropertiesLoader {
         if (getAllMembers(user.getHousehold().getId()).contains(newUser)) {
             error = false;
             newUser.setHousehold(user.getHousehold());
-            newUser.setHouseholdName(user.getHouseholdName());
         }
         return error;
     }

@@ -1,16 +1,28 @@
 package com.ourhouse.entity;
 
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
 /**
  * The user object
  */
+@Entity(name = "User")
+@Table(name = "user")
 public class User {
-    private String householdName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    @Column(name = "Id")
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
     private String username;
+    @Column(name = "householdPrivileges")
     private String permissions;
+    @ManyToOne
     private Household household;
 
     /**
@@ -20,21 +32,21 @@ public class User {
     }
 
     /**
-     * Gets household name.
+     * Gets id.
      *
-     * @return the household name
+     * @return the id
      */
-    public String getHouseholdName() {
-        return householdName;
+    public int getId() {
+        return id;
     }
 
     /**
-     * Sets household name.
+     * Sets id.
      *
-     * @param householdName the household name
+     * @param id the id
      */
-    public void setHouseholdName(String householdName) {
-        this.householdName = householdName;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -145,19 +157,4 @@ public class User {
         this.permissions = permissions;
     }
 
-    /**
-     * gets the string representation of the user
-     * @return string representation of user
-     */
-    @Override
-    public String toString() {
-        return "User{" +
-                "householdName='" + householdName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", username='" + username + '\'' +
-                ", permissions='" + permissions + '\'' +
-                '}';
-    }
 }
