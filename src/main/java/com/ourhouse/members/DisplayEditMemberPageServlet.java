@@ -1,6 +1,9 @@
 package com.ourhouse.members;
 
 import com.ourhouse.entity.User;
+import com.ourhouse.persistence.GenericDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import javax.servlet.*;
@@ -28,9 +31,16 @@ public class DisplayEditMemberPageServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        GenericDao<User> userDao = new GenericDao<>(User.class);
 
-        //This isnt getting the member??????????????????????????
-        User member = (User) request.getAttribute("memberToEdit");
+        User user = (User) session.getAttribute("user");
+        int memberId = Integer.parseInt(request.getParameter("memberToEdit"));
+        User member = null;
+        for (User mem : user.getHousehold().getMembers()) {
+            if (mem.getId() == memberId) {
+                member = mem;
+            }
+        }
 
         session.setAttribute("memberToEdit", member);
 

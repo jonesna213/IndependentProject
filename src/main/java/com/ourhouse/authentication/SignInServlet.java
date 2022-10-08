@@ -3,6 +3,7 @@ package com.ourhouse.authentication;
 import com.ourhouse.entity.Household;
 import com.ourhouse.entity.User;
 import com.ourhouse.persistence.GenericDao;
+import com.ourhouse.persistence.Passwords;
 
 import java.io.*;
 import java.util.List;

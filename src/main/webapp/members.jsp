@@ -11,6 +11,13 @@
             <div class="d-flex flex-row">
                 <div class="mx-auto w-100 px-3">
                     <h3 class="text-decoration-underline pb-3">Members of ${user.getHousehold().getHouseholdName()}</h3>
+                    <c:if test="${memberDeleted == true}" >
+                        <h4 class="py-3 text-success">Member Successfully Deleted</h4>
+                        <c:remove var="memberDeleted" scope="session"/>
+                    </c:if>
+                    <c:if test="${memberToEdit != null}" >
+                        <c:remove var="memberToEdit" scope="session"/>
+                    </c:if>
                     <table class="table table-hover border">
                         <thead>
                             <tr>
@@ -31,7 +38,7 @@
                                 <c:if test="${user.permissions.equals('admin')}" >
                                     <td>
                                         <form action="displayEditMemberPageServlet" method="post">
-                                            <input class="d-none" type="text" name="memberToEdit" value="${member}">
+                                            <input class="d-none" type="text" id="memberToEdit" name="memberToEdit" value="${member.id}">
                                             <input type="submit" value="Edit">
                                         </form>
                                     </td>

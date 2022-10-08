@@ -11,7 +11,7 @@
   <div class="w-50 mx-auto text-center">
     <h2 class="text-decoration-underline">Are you sure you want to sign out?</h2>
     <br>
-    <form action="signOutServlet" method="post" class="">
+    <form action="signOutServlet" method="post">
       <input class="btn btn-success mx-2 p-3" type="submit" name="choice" value="Sign Out"/>
       <input class="btn btn-danger mx-2 p-3" type="submit" name="choice" value="Dont Sign Out"/>
     </form>

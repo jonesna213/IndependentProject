@@ -1,7 +1,6 @@
 package com.ourhouse.members;
 
 import com.ourhouse.entity.User;
-import com.ourhouse.persistence.Database;
 import com.ourhouse.persistence.GenericDao;
 
 import java.io.*;
