@@ -52,4 +52,4 @@ fabric.properties
 aws.properties
 
 # hibernate config
-hibernate.cfg.xml
+src/main/resources/hibernate.cfg.xml
