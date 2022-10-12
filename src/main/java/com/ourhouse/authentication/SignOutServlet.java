@@ -11,7 +11,9 @@ import javax.servlet.annotation.*;
 )
 
 /**
- This servlet class is for Signing out
+ * This servlet class is for Signing out
+ *
+ * @author Navy Jones
  */
 public class SignOutServlet extends HttpServlet {
     /**

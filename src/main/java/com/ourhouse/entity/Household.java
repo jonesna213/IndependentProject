@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The type Household.
+ * The Household object.
+ *
+ * @author Navy Jones
  */
 @Entity(name = "Household")
 @Table(name = "household")

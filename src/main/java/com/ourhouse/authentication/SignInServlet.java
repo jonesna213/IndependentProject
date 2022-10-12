@@ -17,7 +17,9 @@ import javax.servlet.annotation.*;
 )
 
 /**
-    This servlet class is for Signing in
+ * This servlet class is for Signing in
+ *
+ * @author Navy Jones
  */
 public class SignInServlet extends HttpServlet {
     /**

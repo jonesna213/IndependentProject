@@ -15,6 +15,8 @@ import javax.servlet.annotation.*;
 
 /**
  * This servlet class is for adding a new member
+ *
+ * @author Navy Jones
  */
 public class NewMemberServlet extends HttpServlet {
     /**

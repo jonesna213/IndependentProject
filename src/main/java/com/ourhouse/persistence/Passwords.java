@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * This class is for either creating or checking that a password matches.
  *
- * I found this on https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
+ * Found most of the code on https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
  * Reason I used already created code was because I was not taught password hashing in java yet.
  */
 public class Passwords {

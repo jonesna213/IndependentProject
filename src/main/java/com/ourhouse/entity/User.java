@@ -7,6 +7,8 @@ import javax.persistence.*;
 
 /**
  * The user object
+ *
+ * @author Navy Jones
  */
 @Entity(name = "User")
 @Table(name = "user")

@@ -14,6 +14,8 @@ import javax.servlet.annotation.*;
 
 /**
  * This servlet class is for editing or deleting a member
+ *
+ * @author Navy Jones
  */
 public class EditMemberServlet extends HttpServlet {
     /**

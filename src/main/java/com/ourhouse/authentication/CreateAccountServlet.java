@@ -20,7 +20,9 @@ import javax.servlet.annotation.*;
 )
 
 /**
-    This servlet class is for creating an account.
+ * This servlet class is for creating an account.
+ *
+ * @author Navy Jones
  */
 public class CreateAccountServlet extends HttpServlet {
     private final Logger logger = LogManager.getLogger(this.getClass());

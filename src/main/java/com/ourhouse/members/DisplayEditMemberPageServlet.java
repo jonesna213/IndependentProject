@@ -2,8 +2,6 @@ package com.ourhouse.members;
 
 import com.ourhouse.entity.User;
 import com.ourhouse.persistence.GenericDao;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import javax.servlet.*;
@@ -17,6 +15,8 @@ import javax.servlet.annotation.*;
 
 /**
  * This servlet class is for displaying the edit member page (needed to id the correct member to edit)
+ *
+ * @author Navy Jones
  */
 public class DisplayEditMemberPageServlet extends HttpServlet {
     /**
