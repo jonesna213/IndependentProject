@@ -18,8 +18,8 @@
                         <h3>How to use Our House?</h3>
                         <p>If you would like to add other members to
                             your household visit the members tab.
-                            If you would like to see the current chores
-                            or bills visit the corresponding tab.</p>
+                            If you would like to see/add chores
+                            or bills visit the corresponding tabs.</p>
                     </div>
                 </c:if>
                 <c:if test="${user == null}" >

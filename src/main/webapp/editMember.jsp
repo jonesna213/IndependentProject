@@ -74,9 +74,11 @@
                     </fieldset>
                     <p class="text-decoration-underline">All members passwords are the same one that the head of household created</p>
                     <div class="mx-auto">
-                        <input class="btn btn-success" type="submit" name="choice" value="Edit Member"/>
+                        <input class="btn btn-success" type="submit" name="choice" value="Submit Changes"/>
                         <a class="btn btn-primary" href="members.jsp">Back to members</a>
-                        <input class="btn btn-danger" type="submit" name="choice" value="Remove Member"/>
+                        <c:if test="${memberToEdit.id != user.id}" >
+                            <input class="btn btn-danger" type="submit" name="choice" value="Remove Member"/>
+                        </c:if>
                     </div>
                 </form>
             </div>

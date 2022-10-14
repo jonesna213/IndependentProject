@@ -8,7 +8,7 @@
             <div class="w-50 mx-auto">
                 <c:if test="${success != null}" >
                     <c:if test="${success == true}" >
-                        <h3 class="text-success">Account was successfully created, you can now sign in to access your account</h3>
+                        <h3 class="text-success">Account was successfully created, you can now <a href="signin.jsp">sign in</a> to access your account</h3>
                     </c:if>
                     <c:if test="${success == false}" >
                         <h3 class="text-danger">Failed to create account.
