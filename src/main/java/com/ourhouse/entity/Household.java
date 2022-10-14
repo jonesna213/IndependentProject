@@ -12,12 +12,11 @@ import java.util.Set;
  * @author Navy Jones
  */
 @Entity(name = "Household")
-@Table(name = "household")
+@Table(name = "households")
 public class Household {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "Id")
     private int id;
     private String passwordHash;
     private String salt;
@@ -25,6 +24,9 @@ public class Household {
 
     @OneToMany(mappedBy = "household", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<User> members = new HashSet<>();
+
+    @OneToMany(mappedBy = "household", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Chore> chores = new HashSet<>();
 
     /**
      * Instantiates a new Household.
@@ -123,6 +125,24 @@ public class Household {
     }
 
     /**
+     * Gets chores.
+     *
+     * @return the chores
+     */
+    public Set<Chore> getChores() {
+        return chores;
+    }
+
+    /**
+     * Sets chores.
+     *
+     * @param chores the chores
+     */
+    public void setChores(Set<Chore> chores) {
+        this.chores = chores;
+    }
+
+    /**
      * Add member.
      *
      * @param member the member
@@ -140,5 +160,25 @@ public class Household {
     public void removeMember(User member) {
         members.remove(member);
         member.setHousehold(null);
+    }
+
+    /**
+     * Add chore.
+     *
+     * @param chore the chore
+     */
+    public void addChore(Chore chore) {
+        chores.add(chore);
+        chore.setHousehold(this);
+    }
+
+    /**
+     * Remove chore.
+     *
+     * @param chore the chore
+     */
+    public void removeChore(Chore chore) {
+        chores.remove(chore);
+        chore.setHousehold(null);
     }
 }

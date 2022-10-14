@@ -18,6 +18,7 @@
         
         <mapping class="com.ourhouse.entity.User" />
         <mapping class="com.ourhouse.entity.Household" />
+        <mapping class="com.ourhouse.entity.Chore" />
     </session-factory>
 
 </hibernate-configuration>

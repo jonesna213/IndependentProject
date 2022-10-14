@@ -34,7 +34,7 @@ public class EditMemberServlet extends HttpServlet {
         User memberToEdit = (User) session.getAttribute("memberToEdit");
         User user = (User) session.getAttribute("user");
         boolean error = false;
-        String redirectPage = "editMembers.jsp";
+        String redirectPage = "editMember.jsp";
 
         //If the user wanted to delete the member
         String choice = request.getParameter("choice");
