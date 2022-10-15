@@ -1,7 +1,7 @@
 -- Created by Vertabelo (http://vertabelo.com)
 -- Last modification date: 2022-10-14 23:06:20.955
 ALTER TABLE user
-    DROP FOREIGN KEY user_Households;
+    DROP FOREIGN KEY user_households;
 
 ALTER TABLE chores
     DROP FOREIGN KEY chores_households;
@@ -18,10 +18,10 @@ DROP TABLE user;
 CREATE TABLE chores (
                         id int NOT NULL AUTO_INCREMENT,
                         name varchar(255) NOT NULL,
-                        description varchar(255) NOT NULL,
+                        description text NOT NULL,
                         completeBy varchar(100) NOT NULL,
                         frequency varchar(10) NOT NULL,
-                        households_Id int NOT NULL,
+                        household_Id int NOT NULL,
                         CONSTRAINT chores_pk PRIMARY KEY (id)
 );
 
@@ -42,13 +42,13 @@ CREATE TABLE user (
                        lastName varchar(60) NOT NULL,
                        email varchar(255) NULL,
                        householdPrivileges varchar(10) NOT NULL DEFAULT 'user',
-                       households_Id int NOT NULL,
+                       household_Id int NOT NULL,
                        CONSTRAINT user_pk PRIMARY KEY (id)
 );
 
 -- foreign keys
 -- Reference: User_Households (table: user)
-ALTER TABLE user ADD CONSTRAINT user_Households FOREIGN KEY user_Households (household_Id)
+ALTER TABLE user ADD CONSTRAINT user_Households FOREIGN KEY user_households (household_Id)
     REFERENCES households (id);
 
 -- Reference: chores_households (table: chores)
