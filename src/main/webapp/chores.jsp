@@ -13,13 +13,17 @@
             </div>
             <c:if test="${error != null}" >
                 <c:if test="${error == true}" >
-                    <h3 class="text-danger">Failed to add chore, please try again</h3>
+                    <h4 class="text-danger">Failed to add chore, please try again</h4>
                     <p>${message}</p>
                 </c:if>
                 <c:if test="${error == false}" >
-                    <h3 class="text-success">Chore was successfully added</h3>
+                    <h4 class="text-success">Chore was successfully added</h4>
                 </c:if>
                 <c:remove var="error" scope="session"/>
+            </c:if>
+            <c:if test="${choreDeleted == true}" >
+                <h4 class="py-3 text-success">Chore Successfully Deleted</h4>
+                <c:remove var="choreDeleted" scope="session"/>
             </c:if>
 
             <div class="d-flex flex-row justify-content-between align-items-center py-3">
@@ -71,7 +75,7 @@
                                 <td>
                                     <form action="displayDeleteChorePageServlet" method="post">
                                         <input class="d-none" type="text" id="choreToDelete" name="choreToDelete" value="${chore.id}">
-                                        <input type="submit" value="<i class='bi bi-trash'></i>">
+                                        <button class="bg-transparent border-0" type="submit"><i class="bi bi-trash fs-3"></i></button>
                                     </form>
                                 </td>
                             </c:if>

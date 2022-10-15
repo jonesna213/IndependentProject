@@ -1,5 +1,6 @@
-package com.ourhouse.members;
+package com.ourhouse.chores;
 
+import com.ourhouse.entity.Chore;
 import com.ourhouse.entity.User;
 import com.ourhouse.persistence.GenericDao;
 
@@ -9,16 +10,16 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 @WebServlet(
-        name = "displayEditMemberPageServlet",
-        urlPatterns = { "/displayEditMemberPageServlet" }
+        name = "deleteChoreServlet",
+        urlPatterns = { "/deleteChoreServlet" }
 )
 
 /**
- * This servlet class is for displaying the edit member page (needed to id the correct member to edit)
+ * This servlet class is for deleting a chore
  *
  * @author Navy Jones
  */
-public class DisplayEditMemberPageServlet extends HttpServlet {
+public class DeleteChoreServlet extends HttpServlet {
     /**
      *  Handles HTTP POST requests.
      *
@@ -31,19 +32,19 @@ public class DisplayEditMemberPageServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
+        String choice = request.getParameter("choice");
         User user = (User) session.getAttribute("user");
-        int memberId = Integer.parseInt(request.getParameter("memberToEdit"));
-        User member = null;
-        for (User mem : user.getHousehold().getMembers()) {
-            if (mem.getId() == memberId) {
-                member = mem;
-            }
+
+        Chore choreToDelete = (Chore) session.getAttribute("choreToDelete");
+        session.removeAttribute("choreToDelete");
+
+        if (choice.equals("Delete Chore")) {
+            GenericDao<Chore> choreDao = new GenericDao<>(Chore.class);
+            choreDao.delete(choreToDelete);
+            user.getHousehold().removeChore(choreToDelete);
+            session.setAttribute("choreDeleted", true);
         }
 
-        session.setAttribute("memberToEdit", member);
-
-        response.sendRedirect("editMember.jsp");
+        response.sendRedirect("chores.jsp");
     }
 }
-
