@@ -52,6 +52,7 @@ public class EditChoreServlet extends HttpServlet {
             choreToEdit.setDescription(description);
             choreToEdit.setCompleteBy(completeBy);
             choreToEdit.setFrequency(frequency);
+            choreToEdit.setHousehold(user.getHousehold());
 
             choreDao.saveOrUpdate(choreToEdit);
             user.getHousehold().addChore(choreToEdit);

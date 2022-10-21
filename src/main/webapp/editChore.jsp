@@ -34,7 +34,7 @@
                     <div class="form-group my-3">
                         <label for="description" class="fw-bold">Description/Directions</label>
                         <p><em>(Optional)</em></p>
-                        <textarea name="description" class="form-control" id="description" value="${choreToEdit.description}"></textarea>
+                        <textarea name="description" class="form-control" id="description">${choreToEdit.description}</textarea>
                     </div>
                     <div class="form-group my-3">
                         <label for="completeBy" class="fw-bold">Complete by</label>
@@ -78,6 +78,7 @@
                     </fieldset>
                     <div class="mx-auto">
                         <input class="btn btn-success" type="submit" value="Submit Edit"/>
+                        <a class="btn btn-primary" href="chores.jsp">Back to chores</a>
                     </div>
                 </form>
             </div>
