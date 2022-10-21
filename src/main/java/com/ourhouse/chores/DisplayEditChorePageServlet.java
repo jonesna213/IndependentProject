@@ -2,7 +2,6 @@ package com.ourhouse.chores;
 
 import com.ourhouse.entity.Chore;
 import com.ourhouse.entity.User;
-import com.ourhouse.persistence.GenericDao;
 
 import java.io.*;
 import javax.servlet.*;
@@ -10,16 +9,16 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 @WebServlet(
-        name = "displayDeleteChorePageServlet",
-        urlPatterns = { "/displayDeleteChorePageServlet" }
+        name = "displayEditChorePageServlet",
+        urlPatterns = { "/displayEditChorePageServlet" }
 )
 
 /**
- * This servlet class is for displaying delete chore page
+ * This servlet class is for displaying the edit chore page
  *
  * @author Navy Jones
  */
-public class DisplayDeleteChorePageServlet extends HttpServlet {
+public class DisplayEditChorePageServlet extends HttpServlet {
     /**
      *  Handles HTTP POST requests.
      *
@@ -34,7 +33,7 @@ public class DisplayDeleteChorePageServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         User user = (User) session.getAttribute("user");
-        int choreId = Integer.parseInt(request.getParameter("choreToDelete"));
+        int choreId = Integer.parseInt(request.getParameter("choreToEdit"));
         Chore chore = null;
         for (Chore testChore : user.getHousehold().getChores()) {
             if (testChore.getId() == choreId) {
@@ -42,9 +41,9 @@ public class DisplayDeleteChorePageServlet extends HttpServlet {
             }
         }
 
-        session.setAttribute("choreToDelete", chore);
+        session.setAttribute("choreToEdit", chore);
 
-        response.sendRedirect("deleteChore.jsp");
+        response.sendRedirect("editChore.jsp");
     }
 }
 

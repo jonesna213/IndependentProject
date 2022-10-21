@@ -31,7 +31,7 @@
                     <form class="d-flex flex-row align-items-center" action="searchChoresServet" method="get">
                         <i class="bi bi-search fs-3"></i>
                         <input class="form-control mx-2" type="text" name="searchParam" id="searchParam" placeholder="Enter search term">
-                        <select class="form-select me-2">
+                        <select class="form-select me-2" name="searchBy">
                             <option selected value="name">Name</option>
                             <option value="description">Description</option>
                             <option value="completeBy">Complete by</option>
