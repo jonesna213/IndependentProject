@@ -9,7 +9,7 @@
         <div class="container">
             <%@include file="header.jsp"%>
             <div class="w-75 mx-auto">
-                <h2 class="text-decoration-underline">Add a Chore</h2>
+                <h2 class="text-decoration-underline">Edit Chore</h2>
                 <c:if test="${error != null}" >
                     <c:if test="${error == true}" >
                         <h3 class="text-danger">Failed to edit chore, please try again</h3>
