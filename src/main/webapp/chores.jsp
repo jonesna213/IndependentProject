@@ -20,6 +20,7 @@
                     <h4 class="text-success">Chore was successfully added</h4>
                 </c:if>
                 <c:remove var="error" scope="session"/>
+                <c:remove var="message" scope="session"/>
             </c:if>
             <c:if test="${choreDeleted == true}" >
                 <h4 class="py-3 text-success">Chore Successfully Deleted</h4>

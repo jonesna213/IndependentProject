@@ -28,6 +28,9 @@ public class Household {
     @OneToMany(mappedBy = "household", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Chore> chores = new HashSet<>();
 
+    @OneToMany(mappedBy = "household", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Bill> bills = new HashSet<>();
+
     /**
      * Instantiates a new Household.
      */
@@ -143,6 +146,24 @@ public class Household {
     }
 
     /**
+     * Gets bills.
+     *
+     * @return the bills
+     */
+    public Set<Bill> getBills() {
+        return bills;
+    }
+
+    /**
+     * Sets bills.
+     *
+     * @param bills the bills
+     */
+    public void setBills(Set<Bill> bills) {
+        this.bills = bills;
+    }
+
+    /**
      * Add member.
      *
      * @param member the member
@@ -180,5 +201,25 @@ public class Household {
     public void removeChore(Chore chore) {
         chores.remove(chore);
         chore.setHousehold(null);
+    }
+
+    /**
+     * Add bill.
+     *
+     * @param bill the bill
+     */
+    public void addBill(Bill bill) {
+        bills.add(bill);
+        bill.setHousehold(this);
+    }
+
+    /**
+     * Remove bill.
+     *
+     * @param bill the bill
+     */
+    public void removeBill(Bill bill) {
+        bills.remove(bill);
+        bill.setHousehold(null);
     }
 }
