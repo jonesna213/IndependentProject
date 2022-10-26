@@ -128,7 +128,7 @@ public class GenericDao<T> {
     public List<T> getByPropertyLike(String propertyName, String value) {
         Session session = getSession();
 
-        logger.debug("Searching for order with {} = {}",  propertyName, value);
+        logger.debug("Searching for item with {} = {}",  propertyName, value);
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery( type );

@@ -1,8 +1,6 @@
 package com.ourhouse.persistence;
 
 import com.ourhouse.entity.Chore;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
@@ -12,7 +10,6 @@ import java.util.List;
  * @author Navy Jones
  */
 public class Search {
-    private final Logger logger = LogManager.getLogger(this.getClass());
     private final GenericDao<Chore> dao = new GenericDao<>(Chore.class);
 
     /**
