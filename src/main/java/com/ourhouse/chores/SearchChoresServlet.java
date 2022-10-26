@@ -2,7 +2,10 @@ package com.ourhouse.chores;
 
 import com.ourhouse.entity.Chore;
 import com.ourhouse.persistence.GenericDao;
+import com.ourhouse.persistence.Search;
+
 import java.io.*;
+import java.util.List;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -30,18 +33,14 @@ public class SearchChoresServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        GenericDao<Chore> choreDao = new GenericDao<>(Chore.class);
+        Search search = new Search();
         String searchTerm = request.getParameter("searchTerm");
         String searchType = request.getParameter("searchType");
 
-        /*Either create another class to do the search stuff
-        * OR
-        * Do everything in here for searching
-        *
-        * Im thinking more towards doing it in its own class then returning either null or a list of
-        * the search results.
-        * */
+        List<Chore> results = search.searchChores(searchTerm, searchType);
 
+        session.setAttribute("results", results);
+        session.setAttribute("search", true);
 
         response.sendRedirect("chores.jsp");
     }

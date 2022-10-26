@@ -48,39 +48,83 @@
             </c:if>
             <c:if test="${user.getHousehold().getChores().size() != 0}" >
                 <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <td>Name</td>
-                            <td>Description</td>
-                            <td>Complete by</td>
-                            <td>Frequency</td>
-                            <td></td>
-                            <td>Delete</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="chore" items="${user.getHousehold().getChores()}">
-                        <tr>
-                            <td>${chore.name}</td>
-                            <td>${chore.description}</td>
-                            <td>${chore.completeBy}</td>
-                            <td>${chore.frequency}</td>
-                            <c:if test="${user.permissions.equals('admin')}" >
-                                <td>
-                                    <form action="displayEditChorePageServlet" method="post">
-                                        <input class="d-none" type="text" id="choreToEdit" name="choreToEdit" value="${chore.id}">
-                                        <input type="submit" value="Edit">
-                                    </form>
-                                </td>
-                                <td>
-                                    <form action="displayDeleteChorePageServlet" method="post">
-                                        <input class="d-none" type="text" id="choreToDelete" name="choreToDelete" value="${chore.id}">
-                                        <button class="bg-transparent border-0" type="submit"><i class="bi bi-trash fs-3"></i></button>
-                                    </form>
-                                </td>
-                            </c:if>
-                        </tr>
-                    </c:forEach>
+                    <c:if test="${search != true}" >
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Description</td>
+                                <td>Complete by</td>
+                                <td>Frequency</td>
+                                <td></td>
+                                <td>Delete</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="chore" items="${user.getHousehold().getChores()}">
+                            <tr>
+                                <td>${chore.name}</td>
+                                <td>${chore.description}</td>
+                                <td>${chore.completeBy}</td>
+                                <td>${chore.frequency}</td>
+                                <c:if test="${user.permissions.equals('admin')}" >
+                                    <td>
+                                        <form action="displayEditChorePageServlet" method="post">
+                                            <input class="d-none" type="text" id="choreToEdit" name="choreToEdit" value="${chore.id}">
+                                            <input type="submit" value="Edit">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="displayDeleteChorePageServlet" method="post">
+                                            <input class="d-none" type="text" id="choreToDelete" name="choreToDelete" value="${chore.id}">
+                                            <button class="bg-transparent border-0" type="submit"><i class="bi bi-trash fs-3"></i></button>
+                                        </form>
+                                    </td>
+                                </c:if>
+                            </tr>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${search == true}" >
+                        <c:if test="${results == null}" >
+                            <p>No results found for your search.</p>
+                        </c:if>
+                        <c:if test="${results != null}" >
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Description</td>
+                                    <td>Complete by</td>
+                                    <td>Frequency</td>
+                                    <td></td>
+                                    <td>Delete</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="chore" items="${results}">
+                                <tr>
+                                    <td>${chore.name}</td>
+                                    <td>${chore.description}</td>
+                                    <td>${chore.completeBy}</td>
+                                    <td>${chore.frequency}</td>
+                                    <c:if test="${user.permissions.equals('admin')}" >
+                                        <td>
+                                            <form action="displayEditChorePageServlet" method="post">
+                                                <input class="d-none" type="text" id="choreToEdit" name="choreToEdit" value="${chore.id}">
+                                                <input type="submit" value="Edit">
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="displayDeleteChorePageServlet" method="post">
+                                                <input class="d-none" type="text" id="choreToDelete" name="choreToDelete" value="${chore.id}">
+                                                <button class="bg-transparent border-0" type="submit"><i class="bi bi-trash fs-3"></i></button>
+                                            </form>
+                                        </td>
+                                    </c:if>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
+                        <c:remove var="search" scope="session"/>
+                        <c:remove var="results" scope="session"/>
+                    </c:if>
                     </tbody>
                 </table>
             </c:if>
