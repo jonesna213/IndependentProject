@@ -1,5 +1,6 @@
-package com.ourhouse.chores;
+package com.ourhouse.controller;
 
+import com.ourhouse.entity.Bill;
 import com.ourhouse.entity.Chore;
 import com.ourhouse.entity.User;
 import com.ourhouse.persistence.GenericDao;
@@ -34,17 +35,32 @@ public class DisplayDeleteChorePageServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         User user = (User) session.getAttribute("user");
-        int choreId = Integer.parseInt(request.getParameter("choreToDelete"));
-        Chore chore = null;
-        for (Chore testChore : user.getHousehold().getChores()) {
-            if (testChore.getId() == choreId) {
-                chore = testChore;
+        if (request.getParameter("choreToDelete") != null) {
+            int choreId = Integer.parseInt(request.getParameter("choreToDelete"));
+            Chore chore = null;
+            for (Chore testChore : user.getHousehold().getChores()) {
+                if (testChore.getId() == choreId) {
+                    chore = testChore;
+                }
             }
+
+            session.setAttribute("choreToDelete", chore);
+
+            response.sendRedirect("delete.jsp");
+        } else if (request.getParameter("billToDelete") != null) {
+            int billId = Integer.parseInt(request.getParameter("billToDelete"));
+            Bill bill = null;
+            for (Bill testBill : user.getHousehold().getBills()) {
+                if (testBill.getId() == billId) {
+                    bill = testBill;
+                }
+            }
+
+            session.setAttribute("billToDelete", bill);
+
+            response.sendRedirect("delete.jsp");
         }
 
-        session.setAttribute("choreToDelete", chore);
-
-        response.sendRedirect("deleteChore.jsp");
     }
 }
 

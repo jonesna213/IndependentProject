@@ -37,7 +37,7 @@
                                 <td>${member.permissions}</td>
                                 <c:if test="${user.permissions.equals('admin')}" >
                                     <td>
-                                        <form action="displayEditMemberPageServlet" method="post">
+                                        <form action="displayEditPageServlet" method="post">
                                             <input class="d-none" type="text" id="memberToEdit" name="memberToEdit" value="${member.id}">
                                             <input type="submit" value="Edit">
                                         </form>

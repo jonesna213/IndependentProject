@@ -71,7 +71,7 @@
                                 <td>${bill.frequency}</td>
                                 <c:if test="${user.permissions.equals('admin')}" >
                                     <td>
-                                        <form action="displayEditBillPageServlet" method="post">
+                                        <form action="displayEditPageServlet" method="post">
                                             <input class="d-none" type="text" id="billToEdit" name="billToEdit" value="${bill.id}">
                                             <input type="submit" value="Edit">
                                         </form>
@@ -112,7 +112,7 @@
                                         <td>${bill.frequency}</td>
                                         <c:if test="${user.permissions.equals('admin')}" >
                                             <td>
-                                                <form action="displayEditBillPageServlet" method="post">
+                                                <form action="displayEditPageServlet" method="post">
                                                     <input class="d-none" type="text" id="billToEdit" name="billToEdit" value="${bill.id}">
                                                     <input type="submit" value="Edit">
                                                 </form>

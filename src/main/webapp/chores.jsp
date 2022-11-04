@@ -69,7 +69,7 @@
                                 <td>${chore.frequency}</td>
                                 <c:if test="${user.permissions.equals('admin')}" >
                                     <td>
-                                        <form action="displayEditChorePageServlet" method="post">
+                                        <form action="displayEditPageServlet" method="post">
                                             <input class="d-none" type="text" id="choreToEdit" name="choreToEdit" value="${chore.id}">
                                             <input type="submit" value="Edit">
                                         </form>
@@ -108,7 +108,7 @@
                                     <td>${chore.frequency}</td>
                                     <c:if test="${user.permissions.equals('admin')}" >
                                         <td>
-                                            <form action="displayEditChorePageServlet" method="post">
+                                            <form action="displayEditPageServlet" method="post">
                                                 <input class="d-none" type="text" id="choreToEdit" name="choreToEdit" value="${chore.id}">
                                                 <input type="submit" value="Edit">
                                             </form>
