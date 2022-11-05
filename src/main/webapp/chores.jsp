@@ -29,7 +29,7 @@
 
             <div class="d-flex flex-row justify-content-between align-items-center py-3">
                 <c:if test="${user.getHousehold().getChores().size() != 0}" >
-                    <form class="d-flex flex-row align-items-center" action="searchChoresServet" method="get">
+                    <form class="d-flex flex-row align-items-center" action="searchServlet" method="get">
                         <i class="bi bi-search fs-3"></i>
                         <input class="form-control mx-2" type="text" name="searchTerm" id="searchTerm" placeholder="Enter search term">
                         <select class="form-select me-2" name="searchType">
@@ -38,6 +38,7 @@
                             <option value="completeBy">Complete by</option>
                             <option value="frequency">Frequency</option>
                         </select>
+                        <input class="d-none" type="text" name="returnType" value="chore">
                         <button type="submit" name="submit" class="btn btn-primary">Search</button>
                     </form>
                 </c:if>
@@ -75,7 +76,7 @@
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="displayDeleteChorePageServlet" method="post">
+                                        <form action="displayDeletePageServlet" method="post">
                                             <input class="d-none" type="text" id="choreToDelete" name="choreToDelete" value="${chore.id}">
                                             <button class="bg-transparent border-0" type="submit"><i class="bi bi-trash fs-3"></i></button>
                                         </form>
@@ -114,7 +115,7 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="displayDeleteChorePageServlet" method="post">
+                                            <form action="displayDeletePageServlet" method="post">
                                                 <input class="d-none" type="text" id="choreToDelete" name="choreToDelete" value="${chore.id}">
                                                 <button class="bg-transparent border-0" type="submit"><i class="bi bi-trash fs-3"></i></button>
                                             </form>

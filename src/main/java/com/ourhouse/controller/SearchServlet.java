@@ -1,7 +1,7 @@
-package com.ourhouse.chores;
+package com.ourhouse.controller;
 
+import com.ourhouse.entity.Bill;
 import com.ourhouse.entity.Chore;
-import com.ourhouse.persistence.GenericDao;
 import com.ourhouse.persistence.Search;
 
 import java.io.*;
@@ -11,16 +11,16 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 @WebServlet(
-        name = "searchChoresServet",
-        urlPatterns = { "/searchChoresServet" }
+        name = "searchServlet",
+        urlPatterns = { "/searchServlet" }
 )
 
 /**
- * This servlet class is for searching chores
+ * This servlet class is for searching items
  *
  * @author Navy Jones
  */
-public class SearchChoresServlet extends HttpServlet {
+public class SearchServlet extends HttpServlet {
     /**
      *  Handles HTTP GET requests.
      *
@@ -33,16 +33,24 @@ public class SearchChoresServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        Search search = new Search();
         String searchTerm = request.getParameter("searchTerm");
         String searchType = request.getParameter("searchType");
+        String redirectURL = "index.jsp";
+        if (request.getParameter("returnType").equals("bill")) {
+            Search<Bill> search = new Search<>(Bill.class);
+            List<Bill> results = search.search(searchTerm, searchType);
+            session.setAttribute("results", results);
+            redirectURL = "bills.jsp";
+        } else if (request.getParameter("returnType").equals("chore")) {
+            Search<Chore> search = new Search<>(Chore.class);
+            List<Chore> results = search.search(searchTerm, searchType);
+            session.setAttribute("results", results);
+            redirectURL = "chores.jsp";
+        }
 
-        List<Chore> results = search.searchChores(searchTerm, searchType);
-
-        session.setAttribute("results", results);
         session.setAttribute("search", true);
 
-        response.sendRedirect("chores.jsp");
+        response.sendRedirect(redirectURL);
     }
 }
 

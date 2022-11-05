@@ -27,7 +27,7 @@ CREATE TABLE bills (
                        dueDate varchar(20) NOT NULL,
                        amount varchar(20) NOT NULL,
                        frequency varchar(10) NOT NULL,
-                       households_Id int NOT NULL,
+                       household_Id int NOT NULL,
                        CONSTRAINT bills_pk PRIMARY KEY (id)
 );
 
@@ -68,7 +68,7 @@ ALTER TABLE users ADD CONSTRAINT Users_Households FOREIGN KEY Users_Households (
     REFERENCES households (Id);
 
 -- Reference: bills_households (table: bills)
-ALTER TABLE bills ADD CONSTRAINT bills_households FOREIGN KEY bills_households (households_Id)
+ALTER TABLE bills ADD CONSTRAINT bills_households FOREIGN KEY bills_households (household_Id)
     REFERENCES households (Id);
 
 -- Reference: chores_households (table: chores)

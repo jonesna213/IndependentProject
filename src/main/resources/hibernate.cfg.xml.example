@@ -19,6 +19,7 @@
         <mapping class="com.ourhouse.entity.User" />
         <mapping class="com.ourhouse.entity.Household" />
         <mapping class="com.ourhouse.entity.Chore" />
+        <mapping class="com.ourhouse.entity.Bill" />
     </session-factory>
 
 </hibernate-configuration>

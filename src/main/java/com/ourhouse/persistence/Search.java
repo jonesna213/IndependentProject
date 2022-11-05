@@ -6,20 +6,28 @@ import java.util.List;
 
 /**
  * This class is for searching the database for chores.
- *
+ * @param <T> the type of entity you want the search to be for
  * @author Navy Jones
  */
-public class Search {
-    private final GenericDao<Chore> dao = new GenericDao<>(Chore.class);
+public class Search<T> {
+    private Class<T> type;
+    /**
+     * Instantiates a new Search.
+     *
+     * @param type the entity type, for example, User.
+     */
+    public Search(Class<T> type) {
+        this.type = type;
+    }
 
     /**
      * Calls execute search function which returns either null or a list of the items.
      *
      * @param searchTerm the search term
      * @param searchType the search type
-     * @return either null or the list of chores
+     * @return either null or the list of items
      */
-    public List<Chore> searchChores(String searchTerm, String searchType) {
+    public List<T> search(String searchTerm, String searchType) {
         return executeSearch(searchTerm, searchType);
     }
 
@@ -27,15 +35,17 @@ public class Search {
      * Executes the search in the database
      * @param searchTerm the search term
      * @param searchType the search type
-     * @return either null or the list of chores
+     * @return either null or the list of items
      */
-    private List<Chore> executeSearch(String searchTerm, String searchType) {
+    private List<T> executeSearch(String searchTerm, String searchType) {
+        GenericDao<T> dao = new GenericDao<>(type);
         if (!searchType.equals("name") && !searchType.equals("description") && !searchType.equals("completeBy") &&
-                !searchType.equals("frequency")) {
+                !searchType.equals("frequency") && !searchType.equals("title") && !searchType.equals("dueDate") &&
+                !searchType.equals("amount")) {
             return null;
         }
 
-        List<Chore> results = dao.getByPropertyLike(searchType, searchTerm);
+        List<T> results = dao.getByPropertyLike(searchType, searchTerm);
 
         if (results.size() == 0) {
             return null;

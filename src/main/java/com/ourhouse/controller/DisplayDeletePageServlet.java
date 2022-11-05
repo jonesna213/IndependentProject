@@ -3,7 +3,6 @@ package com.ourhouse.controller;
 import com.ourhouse.entity.Bill;
 import com.ourhouse.entity.Chore;
 import com.ourhouse.entity.User;
-import com.ourhouse.persistence.GenericDao;
 
 import java.io.*;
 import javax.servlet.*;
@@ -11,16 +10,16 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 @WebServlet(
-        name = "displayDeleteChorePageServlet",
-        urlPatterns = { "/displayDeleteChorePageServlet" }
+        name = "displayDeletePageServlet",
+        urlPatterns = { "/displayDeletePageServlet" }
 )
 
 /**
- * This servlet class is for displaying delete chore page
+ * This servlet class is for displaying delete page
  *
  * @author Navy Jones
  */
-public class DisplayDeleteChorePageServlet extends HttpServlet {
+public class DisplayDeletePageServlet extends HttpServlet {
     /**
      *  Handles HTTP POST requests.
      *
