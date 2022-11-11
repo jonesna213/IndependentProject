@@ -41,9 +41,8 @@
                     </div>
                     <div class="form-group my-3">
                         <label for="amount" class="fw-bold">Amount</label>
-                        <p><em>Put a "$" in front of the amount</em></p>
                         <input type="text" class="form-control"
-                               name="amount" id="amount">
+                               name="amount" id="amount" value="$">
                     </div>
                     <fieldset class="my-3">
                         <legend class="fw-bold">Frequency</legend>
