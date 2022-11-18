@@ -1,5 +1,6 @@
 DELETE FROM user;
 DELETE FROM chores;
+DELETE FROM bills;
 DELETE FROM households;
 INSERT INTO households VALUES (1, 'password', 'salt', 'testHousehold');
 INSERT INTO households VALUES (2, 'password2', 'salt2', 'testHousehold2');
@@ -10,3 +11,6 @@ INSERT INTO user VALUES (3, 'jeffJames', 'Jeff', 'James', 'jeffjames@gmail.com',
 INSERT INTO chores VALUES (1, 'firstChore', 'firstChoreDescription', '1st', 'frequency1', 1);
 INSERT INTO chores VALUES (2, 'secondChore', 'secondChoreDescription', '2nd', 'frequency2', 1);
 INSERT INTO chores VALUES (3, 'thirdChore', 'thirdChoreDescription', '3rd', 'frequency3', 1);
+INSERT INTO bills VALUES (1, 'firstBill', 'firstDescription', 'firstDueDate', 'firstAmount', 'frequency1', 1);
+INSERT INTO bills VALUES (2, 'secondBill', 'secondDescription', 'secondDueDate', 'secondAmount', 'frequency2', 1);
+INSERT INTO bills VALUES (3, 'thirdBill', 'thirdDescription', 'thirdDueDate', 'thirdAmount', 'frequency3', 1);

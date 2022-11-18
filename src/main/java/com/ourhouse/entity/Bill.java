@@ -3,6 +3,7 @@ package com.ourhouse.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * The Bill object.
@@ -33,7 +34,6 @@ public class Bill {
     /**
      * Instantiates a new Bill.
      *
-     * @param id          the id
      * @param title       the title
      * @param description the description
      * @param dueDate     the due date
@@ -41,8 +41,7 @@ public class Bill {
      * @param frequency   the frequency
      * @param household   the household
      */
-    public Bill(int id, String title, String description, String dueDate, String amount, String frequency, Household household) {
-        this.id = id;
+    public Bill(String title, String description, String dueDate, String amount, String frequency, Household household) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -175,5 +174,18 @@ public class Bill {
      */
     public void setHousehold(Household household) {
         this.household = household;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bill bill = (Bill) o;
+        return id == bill.id && Objects.equals(title, bill.title) && Objects.equals(description, bill.description) && Objects.equals(dueDate, bill.dueDate) && Objects.equals(amount, bill.amount) && Objects.equals(frequency, bill.frequency);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, dueDate, amount, frequency);
     }
 }
