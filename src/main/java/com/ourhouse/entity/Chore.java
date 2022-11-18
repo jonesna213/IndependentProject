@@ -3,6 +3,7 @@ package com.ourhouse.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * The Chore object.
@@ -152,5 +153,18 @@ public class Chore {
      */
     public void setHousehold(Household household) {
         this.household = household;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Chore chore = (Chore) o;
+        return id == chore.id && Objects.equals(name, chore.name) && Objects.equals(description, chore.description) && Objects.equals(completeBy, chore.completeBy) && Objects.equals(frequency, chore.frequency);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, completeBy, frequency);
     }
 }
