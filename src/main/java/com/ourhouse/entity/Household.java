@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -35,6 +36,19 @@ public class Household {
      * Instantiates a new Household.
      */
     public Household() {
+    }
+
+    /**
+     * Instantiates a new Household.
+     *
+     * @param passwordHash  the password hash
+     * @param salt          the salt
+     * @param householdName the household name
+     */
+    public Household(String passwordHash, String salt, String householdName) {
+        this.passwordHash = passwordHash;
+        this.salt = salt;
+        this.householdName = householdName;
     }
 
     /**
@@ -221,5 +235,18 @@ public class Household {
     public void removeBill(Bill bill) {
         bills.remove(bill);
         bill.setHousehold(null);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Household household = (Household) o;
+        return id == household.id && Objects.equals(passwordHash, household.passwordHash) && Objects.equals(salt, household.salt) && Objects.equals(householdName, household.householdName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, passwordHash, salt, householdName);
     }
 }

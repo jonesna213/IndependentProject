@@ -76,11 +76,14 @@ public class UserDaoTest {
      */
     @Test
     void deleteSuccess() {
+        GenericDao<Household> householdDao = new GenericDao<>(Household.class);
         User user = dao.getById(1);
 
         dao.delete(user);
+        Household household = householdDao.getById(1);
 
         assertNull(dao.getById(1));
+        assertFalse(household.getMembers().contains(user));
     }
 
     /**
