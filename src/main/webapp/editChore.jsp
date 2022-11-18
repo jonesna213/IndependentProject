@@ -81,7 +81,6 @@
                         <a class="btn btn-primary" href="chores.jsp">Back to chores</a>
                     </div>
                 </form>
-                <c:remove var="choreToEdit" scope="session"/>
             </div>
             <%@include file="footer.jsp"%>
         </div>

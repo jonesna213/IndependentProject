@@ -130,6 +130,7 @@
                             </c:if>
                             <c:remove var="search" scope="session"/>
                             <c:remove var="results" scope="session"/>
+                            <c:remove var="billToEdit" scope="session"/>
                         </c:if>
                         </tbody>
                     </table>

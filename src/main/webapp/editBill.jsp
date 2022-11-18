@@ -84,7 +84,6 @@
                         <a class="btn btn-primary" href="bills.jsp">Back to bills</a>
                     </div>
                 </form>
-                <c:remove var="billToEdit" scope="session"/>
             </div>
             <%@include file="footer.jsp"%>
         </div>
