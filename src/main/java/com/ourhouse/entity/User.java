@@ -4,6 +4,7 @@ package com.ourhouse.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * The user object
@@ -30,6 +31,25 @@ public class User {
      * Instantiates a new User.
      */
     public User() {
+    }
+
+    /**
+     * Instantiates a new User.
+     *
+     * @param firstName   the first name
+     * @param lastName    the last name
+     * @param email       the email
+     * @param username    the username
+     * @param permissions the permissions
+     * @param household   the household
+     */
+    public User(String firstName, String lastName, String email, String username, String permissions, Household household) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.permissions = permissions;
+        this.household = household;
     }
 
     /**
@@ -156,6 +176,19 @@ public class User {
      */
     public void setPermissions(String permissions) {
         this.permissions = permissions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(username, user.username) && Objects.equals(permissions, user.permissions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, username, permissions);
     }
 
     @Override

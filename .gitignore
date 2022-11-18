@@ -54,3 +54,4 @@ aws.properties
 # hibernate and log4j
 hibernate.cfg.xml
 log4j2.properties
+database.properties
