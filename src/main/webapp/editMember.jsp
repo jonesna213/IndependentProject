@@ -68,7 +68,7 @@
                             <label for="user" class="form-check-label">
                                 <input id="user" class="form-check-input" type="radio" name="perms" value="user"
                                        <c:if test="${memberToEdit.permissions.equals('user')}" >checked</c:if>>
-                                Can only view/mark complete
+                                Can only view
                             </label>
                         </div>
                     </fieldset>

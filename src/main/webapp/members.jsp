@@ -8,7 +8,7 @@
     <body>
         <div class="container">
             <%@include file="header.jsp"%>
-            <div class="d-flex flex-row">
+            <div class="d-flex flex-column flex-lg-row">
                 <div class="mx-auto w-100 px-3">
                     <h3 class="text-decoration-underline pb-3">Members of ${user.getHousehold().getHouseholdName()}</h3>
                     <c:if test="${memberDeleted == true}" >
@@ -108,7 +108,7 @@
                                 <div class="form-check">
                                     <label for="user" class="form-check-label">
                                         <input id="user" class="form-check-input" type="radio" name="perms" value="user">
-                                        Can only view/mark complete
+                                        Can only view
                                     </label>
                                 </div>
                             </fieldset>

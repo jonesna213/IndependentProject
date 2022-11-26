@@ -14,7 +14,7 @@
                 <div class="col-12"></div>
                 <div class="col-12 col-lg-6"></div>
                 <c:if test="${user != null}" >
-                    <div class="col-10 col-lg-5">
+                    <div class="col-10 col-lg-5 px-5 px-lg-0">
                         <h3>How to use Our House?</h3>
                         <p>If you would like to add other members to
                             your household visit the members tab.
