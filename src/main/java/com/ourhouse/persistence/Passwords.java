@@ -12,13 +12,18 @@ import java.util.List;
 /**
  * This class is for either creating or checking that a password matches.
  *
- * Found most of the code on https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
- * Reason I used already created code was because I was not taught password hashing in java yet.
+ * @author Navy Jones
  */
 public class Passwords {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
-    //used for creating a new account
+    /**
+     * Used for creating a new account
+     *
+     * @param password the string of the password
+     * @return a list containing the password hash and salt
+     * @throws NoSuchAlgorithmException error from generating password
+     */
     public List<String> getPassword(String password) throws NoSuchAlgorithmException {
         List<String> passwordHashAndSalt = new ArrayList<String>();
         String salt = getSalt();
@@ -28,11 +33,25 @@ public class Passwords {
         return passwordHashAndSalt;
     }
 
-    //Used for signing in
+    /**
+     * Used for signing in
+     *
+     * @param password the string of the password
+     * @param salt the passwords salt
+     * @return the hash of the password and salt
+     */
     public String getPasswordHash(String password, String salt) {
         return get_SHA_512_SecurePassword(password, salt);
     }
 
+    /**
+     * Generates the password hash.
+     * Found on - https://howtodoinjava.com/java/java-security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
+     *
+     * @param passwordToHash the password to hash
+     * @param salt the password salt
+     * @return the password hash
+     */
     private String get_SHA_512_SecurePassword(String passwordToHash,
                                                      String salt) {
         String generatedPassword = null;
@@ -52,7 +71,12 @@ public class Passwords {
         return generatedPassword;
     }
 
-    // Add salt
+    /**
+     * Creates salt
+     *
+     * @return string containing salt
+     * @throws NoSuchAlgorithmException error with secure random
+     */
     private static String getSalt() throws NoSuchAlgorithmException {
         SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
         byte[] salt = new byte[16];

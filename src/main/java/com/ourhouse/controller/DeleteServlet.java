@@ -41,9 +41,11 @@ public class DeleteServlet extends HttpServlet {
             case "Delete Chore":
                 Chore choreToDelete = (Chore) session.getAttribute("choreToDelete");
                 session.removeAttribute("choreToDelete");
+
                 GenericDao<Chore> choreDao = new GenericDao<>(Chore.class);
                 choreDao.delete(choreToDelete);
                 user.getHousehold().removeChore(choreToDelete);
+
                 session.setAttribute("choreDeleted", true);
                 redirectURL = "chores.jsp";
                 break;
@@ -53,9 +55,11 @@ public class DeleteServlet extends HttpServlet {
             case "Delete Bill":
                 Bill billToDelete = (Bill) session.getAttribute("billToDelete");
                 session.removeAttribute("billToDelete");
+
                 GenericDao<Bill> billDao = new GenericDao<>(Bill.class);
                 billDao.delete(billToDelete);
                 user.getHousehold().removeBill(billToDelete);
+
                 session.setAttribute("billDeleted", true);
                 redirectURL = "bills.jsp";
                 break;

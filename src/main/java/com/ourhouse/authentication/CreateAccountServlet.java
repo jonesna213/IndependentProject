@@ -52,17 +52,18 @@ public class CreateAccountServlet extends HttpServlet {
                 email.equals("") || username.equals("") || password.equals("")) {
             success = false;
         } else {
-            //Add the user to the database
+            //make sure household name and username are unique
             if (householdDao.getByPropertyEqual("householdName", householdName).size() != 0) {
-                session.setAttribute("message", "The username you chose is not available, " +
+                session.setAttribute("message", "The household name you chose is not available, " +
                         "please choose another");
                 success = false;
             } else if (userDao.getByPropertyEqual("username", username).size() != 0) {
-                session.setAttribute("message", "The household name you chose is not available, " +
+                session.setAttribute("message", "The username name you chose is not available, " +
                         "please choose another");
                 success = false;
             } else {
                 try {
+                    //Generate password and insert household/user into database
                     Passwords genPassword = new Passwords();
                     List<String> passwordStuff = genPassword.getPassword(password);
 

@@ -42,9 +42,10 @@ public class SignInServlet extends HttpServlet {
         GenericDao<Household> householdDao = new GenericDao<>(Household.class);
         User user = null;
 
-        if (username.equals("") || password.equals("")) {
+        if (username.equals("") || password.equals("") || householdName.equals("")) {
             error = true;
         } else {
+            //Verify password, username and household name match up
             Passwords genPassword = new Passwords();
             List<User> possibleUser = userDao.getByPropertyEqual("username", username);
             List<Household> possibleHousehold = householdDao.getByPropertyEqual("householdName", householdName);

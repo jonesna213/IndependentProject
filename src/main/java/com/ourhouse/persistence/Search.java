@@ -21,23 +21,12 @@ public class Search<T> {
     }
 
     /**
-     * Calls execute search function which returns either null or a list of the items.
-     *
-     * @param searchTerm the search term
-     * @param searchType the search type
-     * @return either null or the list of items
-     */
-    public List<T> search(String searchTerm, String searchType) {
-        return executeSearch(searchTerm, searchType);
-    }
-
-    /**
      * Executes the search in the database
      * @param searchTerm the search term
      * @param searchType the search type
      * @return either null or the list of items
      */
-    private List<T> executeSearch(String searchTerm, String searchType) {
+    public List<T> executeSearch(String searchTerm, String searchType) {
         GenericDao<T> dao = new GenericDao<>(type);
         if (!searchType.equals("name") && !searchType.equals("description") && !searchType.equals("completeBy") &&
                 !searchType.equals("frequency") && !searchType.equals("title") && !searchType.equals("dueDate") &&
