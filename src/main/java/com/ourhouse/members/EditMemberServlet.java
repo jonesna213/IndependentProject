@@ -42,7 +42,6 @@ public class EditMemberServlet extends HttpServlet {
             userDao.delete(memberToEdit);
             user.getHousehold().removeMember(memberToEdit);
             session.setAttribute("memberDeleted", true);
-            session.setAttribute("user", user);
             redirectPage = "members.jsp";
         } else {
             String firstName = request.getParameter("fname");
