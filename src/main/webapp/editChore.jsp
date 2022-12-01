@@ -26,7 +26,6 @@
                         <label for="name" class="fw-bold">Name</label>
                         <input type="text" class="form-control"
                                name="name" id="name" maxlength="255"
-                               pattern="[a-zA-Z]{1,255}"
                                title="Name is required, up to 255 characters"
                                value="${choreToEdit.name}"
                                required/>
